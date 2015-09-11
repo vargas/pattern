@@ -110,7 +110,7 @@ replacements = {
   "lorsqu'": "lorsqu' ",
   "puisqu'": "puisqu' ",
     # Same rule for Unicode apostrophe, see also Parser.find_tokens():
-    ur"(l|c|d|j|m|n|qu|s|t|jusqu|lorsqu|puisqu)’": u"\\1&rsquo; "
+    ur"(l|c|d|j|m|n|qu|s|t|jusqu|lorsqu|puisqu)’": u"\\1' "
 }
 replacements.update(((k.upper(), v.upper()) for k, v in replacements.items()))
 
@@ -139,7 +139,7 @@ class Parser(_Parser):
         kwargs.setdefault("abbreviations", ABBREVIATIONS)
         kwargs.setdefault("replace", replacements)
         s = _Parser.find_tokens(self, tokens, **kwargs)
-        s = [s.replace("&rsquo ;", u"’") if isinstance(s, unicode) else s for s in s]
+        s = [s.replace("'", u"’") if isinstance(s, unicode) else s for s in s]
         return s
 
     def find_lemmata(self, tokens, **kwargs):
